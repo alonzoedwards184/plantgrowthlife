@@ -144,19 +144,22 @@
       "id": "24",
       "plantName": "Lavender",
       "growthStage": "Flowering",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "25",
       "plantName": "Mushrooms",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "26",
       "plantName": "Cabbage",
       "growthStage": "Vegetative",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "27",

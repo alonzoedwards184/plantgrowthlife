@@ -19,8 +19,7 @@ const PlantList: React.FC<PlantListProps> = ({
     <td>{plant.plantName}</td>
     <td>{plant.growthStage}</td>
     <td>{plant.nutrientLevel}</td>
-    <td>{plant.plantDate.toLocaleDateString()}</td>{" "}
-    {/* Convert Date to string */}
+    <td>{plant.plantDate}</td> {/* Convert Date to string */}
     <td>
       <button
         className="btn btn-primary"
