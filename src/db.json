@@ -4,13 +4,8 @@
       "id": "2",
       "plantName": "Basil",
       "growthStage": "Seedling",
-      "nutrientLevel": "Medium"
-    },
-    {
-      "id": "3",
-      "plantName": "Lettuce",
-      "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-04-30T05:00:00.000Z"
     },
     {
       "id": "4",
@@ -107,6 +102,80 @@
       "plantName": "DingleBerry",
       "growthStage": "Seedling",
       "nutrientLevel": "High"
+    },
+    {
+      "id": "18",
+      "plantName": "Rosemary",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "19",
+      "plantName": "Thyme",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "20",
+      "plantName": "Oregano",
+      "growthStage": "Flowering",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "21",
+      "plantName": "Chives",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Low"
+    },
+    {
+      "id": "22",
+      "plantName": "Sage",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "23",
+      "plantName": "Coriander",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "24",
+      "plantName": "Lavender",
+      "growthStage": "Flowering",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "25",
+      "plantName": "Mushrooms",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "26",
+      "plantName": "Cabbage",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "27",
+      "plantName": "Celery",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "3aa3",
+      "plantName": "Banana",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Low",
+      "plantDate": "2024-05-22T14:55:25.000Z"
+    },
+    {
+      "id": "76ac",
+      "plantName": "Apple",
+      "growthStage": "Seedling",
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-24T15:13:07.000Z"
     }
   ]
 }

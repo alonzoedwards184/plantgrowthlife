@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
+import CustomDatePicker from "./CustomDatePicker.tsx";
 
 interface Plant {
   plantName: string;
   growthStage: string;
   nutrientLevel: string;
+  plantDate: Date; // Add plantDate property
 }
 
 interface ModalProps {
@@ -18,6 +20,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     plantName: "",
     growthStage: "",
     nutrientLevel: "",
+    plantDate: new Date(), // Initialize plantDate with current date
   });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
@@ -33,6 +36,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
       plantName: "",
       growthStage: "",
       nutrientLevel: "",
+      plantDate: new Date(), // Reset plantDate to current date
     });
   };
 
@@ -41,6 +45,13 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     setNewPlantData((prevState) => ({
       ...prevState,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setNewPlantData((prevState) => ({
+      ...prevState,
+      plantDate: date || new Date(), // Set plantDate to selected date or current date if null
     }));
   };
 
@@ -122,18 +133,25 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     onChange={handleInputChange}
                   />
                 </div>
+                <div className="form-group">
+                  <label htmlFor="plantDate">Plant Date</label>
+                  <CustomDatePicker
+                    selectedDate={newPlantData.plantDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
                 {children}
               </div>
               <div className="modal-footer">
-                {/*\ Cancel Button */}
+                {/* Cancel Button */}
                 <button
                   type="button"
                   className="btn btn-secondary"
                   onClick={handleCancelClick}
                 >
                   Cancel
-                  {/*\ Save Button */}
                 </button>
+                {/* Save Button */}
                 <button
                   type="button"
                   className="btn btn-primary"

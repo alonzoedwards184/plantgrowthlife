@@ -1,9 +1,11 @@
+// Import statements...
 import { useEffect, useState } from "react";
 import PlantEditModal from "../components/PlantEditModal";
 import PlantAddButton from "../components/PlantAddButton";
 import PlantAddModal from "../components/PlantAddModal";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
 import PlantList from "../components/PlantList";
+import Pagination from "../components/Pagination.tsx";
 
 // Define the Plant interface
 interface Plant {
@@ -11,9 +13,8 @@ interface Plant {
   plantName: string;
   growthStage: string;
   nutrientLevel: string;
+  plantDate: string;
 }
-
-// Define the PlantTable component
 const PlantTable = () => {
   // State variables
   const [plants, setPlants] = useState<Plant[]>([]);
@@ -21,6 +22,7 @@ const PlantTable = () => {
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const itemsPerPage = 20; // Predefined limit per page
 
   // Fetch plants data from json-server endpoint on component mount
   useEffect(() => {
@@ -72,6 +74,15 @@ const PlantTable = () => {
     setDeleteModalOpen(false);
   };
 
+  // Pagination logic
+  const totalItems = plants.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const paginatedPlants = plants.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage,
+  );
+
   // Render the component
   return (
     <>
@@ -84,22 +95,30 @@ const PlantTable = () => {
             <th scope="col">Plant Name</th>
             <th scope="col">Growth Stage</th>
             <th scope="col">Nutrient Level</th>
+            <th scope="col">Plant Date</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           {/* Render each plant row */}
-          {plants.map((plant, index) => (
+          {paginatedPlants.map((plant, index) => (
             <PlantList
               key={plant.id}
               plant={plant}
-              index={index}
+              index={(currentPage - 1) * itemsPerPage + index} // Calculate index based on pagination
               handleEditClick={handleEditClick}
               handleDeleteClick={handleDeleteClick}
             />
           ))}
         </tbody>
       </table>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        data={paginatedPlants} // Pass paginated data
+        itemsPerPage={itemsPerPage}
+      />
       {/* Modals for editing, adding, and confirming deletion */}
       <PlantEditModal
         isOpen={editModalOpen}

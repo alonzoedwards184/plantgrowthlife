@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
 import { Plant } from "../Views/PlantTable.tsx";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface ModalProps {
   isOpen: boolean;
@@ -19,6 +21,7 @@ const PlantEditModal: React.FC<ModalProps> = ({
     plantName: "",
     growthStage: "",
     nutrientLevel: "",
+    plantDate: new Date(),
   });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
@@ -30,19 +33,26 @@ const PlantEditModal: React.FC<ModalProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedPlantData((prevState: []) => ({
+    setEditedPlantData((prevState: Plant) => ({
       ...prevState,
       [name]: value,
     }));
   };
-  // Handlers
+
+  const handleDateChange = (date: Date | null) => {
+    setEditedPlantData((prevState: Plant) => ({
+      ...prevState,
+      plantDate: date || new Date(),
+    }));
+  };
+
   const handleCancelClick = () => {
     setIsCancelModalOpen(true);
   };
 
   const handleCancelConfirm = () => {
     setIsCancelModalOpen(false);
-    onClose(); // Close the main modal
+    onClose();
   };
 
   const handleSaveChanges = () => {
@@ -51,7 +61,6 @@ const PlantEditModal: React.FC<ModalProps> = ({
       return;
     }
 
-    // Make sure edited plant data is not empty
     if (
       !editedPlantData.plantName ||
       !editedPlantData.growthStage ||
@@ -61,7 +70,6 @@ const PlantEditModal: React.FC<ModalProps> = ({
       return;
     }
 
-    // Make a POST request to update the plant data
     fetch(`http://localhost:3000/plants/${plantData.id}`, {
       method: "PUT",
       headers: {
@@ -74,7 +82,7 @@ const PlantEditModal: React.FC<ModalProps> = ({
           throw new Error("Failed to update plant data.");
         }
         console.log("Plant data updated successfully.");
-        onClose(); // Close the modal after successful update
+        onClose();
       })
       .catch((error) => console.error(error));
   };
@@ -126,6 +134,16 @@ const PlantEditModal: React.FC<ModalProps> = ({
                         name="nutrientLevel"
                         value={editedPlantData.nutrientLevel}
                         onChange={handleInputChange}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="plantDate">Plant Date</label>
+                      <DatePicker
+                        selected={editedPlantData.plantDate}
+                        onChange={handleDateChange}
+                        dateFormat="dd/MM/yyyy"
+                        placeholderText="Select Date"
+                        className="form-control" // Apply the same class as other inputs
                       />
                     </div>
                   </>
