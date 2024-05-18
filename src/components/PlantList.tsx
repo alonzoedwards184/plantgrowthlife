@@ -1,5 +1,5 @@
 import React from "react";
-import { Plant } from "../Views/PlantTable.tsx";
+import { Plant } from "./Plant.tsx";
 
 interface PlantListProps {
   plant: Plant;
@@ -19,7 +19,8 @@ const PlantList: React.FC<PlantListProps> = ({
     <td>{plant.plantName}</td>
     <td>{plant.growthStage}</td>
     <td>{plant.nutrientLevel}</td>
-    <td>{plant.plantDate}</td>
+    <td>{plant.plantDate.toLocaleDateString()}</td>{" "}
+    {/* Convert Date to string */}
     <td>
       <button
         className="btn btn-primary"

@@ -5,7 +5,7 @@
       "plantName": "Basil",
       "growthStage": "Seedling",
       "nutrientLevel": "Medium",
-      "plantDate": "2024-04-30T05:00:00.000Z"
+      "plantDate": "2024-05-01T05:00:00.000Z"
     },
     {
       "id": "4",
@@ -82,7 +82,7 @@
       "plantName": "Watercress",
       "growthStage": "Vegetative",
       "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
+      "plantDate": "2024-05-19T05:00:00.000Z"
     },
     {
       "id": "15",
@@ -95,55 +95,50 @@
       "id": "17",
       "plantName": "Cilantro",
       "growthStage": "Seedling",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "3d65",
       "plantName": "Plant 2",
       "growthStage": "Seedling",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "99fd",
       "plantName": "DingleBerry",
       "growthStage": "Seedling",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "18",
       "plantName": "Rosemary",
       "growthStage": "Vegetative",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "19",
       "plantName": "Thyme",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "20",
       "plantName": "Oregano",
       "growthStage": "Flowering",
-      "nutrientLevel": "Medium"
-    },
-    {
-      "id": "21",
-      "plantName": "Chives",
-      "growthStage": "Seedling",
-      "nutrientLevel": "Low"
-    },
-    {
-      "id": "22",
-      "plantName": "Sage",
-      "growthStage": "Vegetative",
-      "nutrientLevel": "High"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "23",
       "plantName": "Coriander",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "24",

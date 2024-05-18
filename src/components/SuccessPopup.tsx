@@ -9,7 +9,7 @@ const SuccessPopup: React.FC<SuccessPopupProps> = ({ message, onClose }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose(); // Close the popup after a certain duration (e.g., 3 seconds)
-    }, 3000);
+    }, 100000);
 
     return () => clearTimeout(timer); // Clear the timer on component unmount
   }, [onClose]);

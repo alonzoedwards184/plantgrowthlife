@@ -1,5 +1,5 @@
 import React from "react";
-import { Plant } from "../Views/PlantTable.tsx";
+import { Plant } from "./Plant.tsx";
 interface PaginationProps {
   currentPage: number;
   totalPages: number;

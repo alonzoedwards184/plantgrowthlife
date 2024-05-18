@@ -1,4 +1,3 @@
-// Import statements...
 import { useEffect, useState } from "react";
 import PlantEditModal from "../components/PlantEditModal";
 import PlantAddButton from "../components/PlantAddButton";
@@ -6,25 +5,16 @@ import PlantAddModal from "../components/PlantAddModal";
 import DeleteConfirmationModal from "../components/DeleteConfirmationModal";
 import PlantList from "../components/PlantList";
 import Pagination from "../components/Pagination.tsx";
+import { Plant } from "../components/Plant.tsx";
 
-// Define the Plant interface
-interface Plant {
-  id: number;
-  plantName: string;
-  growthStage: string;
-  nutrientLevel: string;
-  plantDate: string;
-}
 const PlantTable = () => {
-  // State variables
   const [plants, setPlants] = useState<Plant[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
   const [addModalOpen, setAddModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
-  const itemsPerPage = 20; // Predefined limit per page
+  const itemsPerPage = 20;
 
-  // Fetch plants data from json-server endpoint on component mount
   useEffect(() => {
     fetch("http://localhost:3000/plants")
       .then((response) => response.json())
@@ -32,7 +22,6 @@ const PlantTable = () => {
       .catch((error) => console.error("Error fetching plants:", error));
   }, []);
 
-  // Handlers for edit, add, and delete actions
   const handleEditClick = (index: number) => {
     setSelectedIndex(index);
     setEditModalOpen(true);
@@ -66,7 +55,6 @@ const PlantTable = () => {
     }
   };
 
-  // Close all modals
   const handleCloseModals = () => {
     setSelectedIndex(null);
     setEditModalOpen(false);
@@ -74,7 +62,6 @@ const PlantTable = () => {
     setDeleteModalOpen(false);
   };
 
-  // Pagination logic
   const totalItems = plants.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
@@ -83,43 +70,45 @@ const PlantTable = () => {
     currentPage * itemsPerPage,
   );
 
-  // Render the component
   return (
     <>
       <h1>Hydroponic Plant Table</h1>
       <PlantAddButton onClick={handleAddClick}>Add Plant</PlantAddButton>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Plant Name</th>
-            <th scope="col">Growth Stage</th>
-            <th scope="col">Nutrient Level</th>
-            <th scope="col">Plant Date</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Render each plant row */}
-          {paginatedPlants.map((plant, index) => (
-            <PlantList
-              key={plant.id}
-              plant={plant}
-              index={(currentPage - 1) * itemsPerPage + index} // Calculate index based on pagination
-              handleEditClick={handleEditClick}
-              handleDeleteClick={handleDeleteClick}
-            />
-          ))}
-        </tbody>
-      </table>
+      <div
+        className="scroll-container"
+        style={{ height: "400px", overflow: "auto" }}
+      >
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Plant Name</th>
+              <th scope="col">Growth Stage</th>
+              <th scope="col">Nutrient Level</th>
+              <th scope="col">Plant Date</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedPlants.map((plant, index) => (
+              <PlantList
+                key={plant.id}
+                plant={plant}
+                index={(currentPage - 1) * itemsPerPage + index}
+                handleEditClick={handleEditClick}
+                handleDeleteClick={handleDeleteClick}
+              />
+            ))}
+          </tbody>
+        </table>
+      </div>
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
-        data={paginatedPlants} // Pass paginated data
+        data={paginatedPlants}
         itemsPerPage={itemsPerPage}
       />
-      {/* Modals for editing, adding, and confirming deletion */}
       <PlantEditModal
         isOpen={editModalOpen}
         onClose={handleCloseModals}
