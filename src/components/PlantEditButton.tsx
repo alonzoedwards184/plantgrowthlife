@@ -1,8 +1,6 @@
-import React from "react";
-
 interface PlantEditButtonProps {
   children: React.ReactNode;
-  onClick: () => void; // Add onClick prop
+  onClick: () => void;
 }
 
 const PlantEditButton: React.FC<PlantEditButtonProps> = ({

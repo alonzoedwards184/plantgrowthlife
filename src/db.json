@@ -1,0 +1,112 @@
+{
+  "plants": [
+    {
+      "id": "2",
+      "plantName": "Basil",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "3",
+      "plantName": "Lettuce",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "4",
+      "plantName": "Tomato",
+      "growthStage": "Flowering",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "5",
+      "plantName": "Spinach",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Low"
+    },
+    {
+      "id": "6",
+      "plantName": "Cucumber",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "7",
+      "plantName": "Bell Pepper",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "8",
+      "plantName": "Kale",
+      "growthStage": "Flowering",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "9",
+      "plantName": "Cherry Tomato",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "10",
+      "plantName": "Mint",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "11",
+      "plantName": "Arugula",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "12",
+      "plantName": "Parsley",
+      "growthStage": "Flowering",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "13",
+      "plantName": "Zucchini",
+      "growthStage": "Seedling",
+      "nutrientLevel": "Low"
+    },
+    {
+      "id": "14",
+      "plantName": "Watercress",
+      "growthStage": "Vegetative",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "15",
+      "plantName": "Broccoli",
+      "growthStage": "Mature",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "16",
+      "plantName": "Dill",
+      "growthStage": "Flowering",
+      "nutrientLevel": "Medium"
+    },
+    {
+      "id": "17",
+      "plantName": "Cilantro",
+      "growthStage": "Seedling",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "3d65",
+      "plantName": "Plant 2",
+      "growthStage": "Seedling",
+      "nutrientLevel": "High"
+    },
+    {
+      "id": "99fd",
+      "plantName": "DingleBerry",
+      "growthStage": "Seedling",
+      "nutrientLevel": "High"
+    }
+  ]
+}

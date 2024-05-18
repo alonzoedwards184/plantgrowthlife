@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
-
-interface Plant {
-  plantName: string;
-  growthStage: string;
-  nutrientLevel: string;
-}
+import { Plant } from "../Views/PlantTable.tsx";
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,12 +30,12 @@ const PlantEditModal: React.FC<ModalProps> = ({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setEditedPlantData((prevState) => ({
+    setEditedPlantData((prevState: []) => ({
       ...prevState,
       [name]: value,
     }));
   };
-
+  // Handlers
   const handleCancelClick = () => {
     setIsCancelModalOpen(true);
   };
@@ -51,9 +46,37 @@ const PlantEditModal: React.FC<ModalProps> = ({
   };
 
   const handleSaveChanges = () => {
-    // Save changes logic
-    console.log("Saving changes...");
-    onClose();
+    if (!plantData) {
+      console.error("No plant data available.");
+      return;
+    }
+
+    // Make sure edited plant data is not empty
+    if (
+      !editedPlantData.plantName ||
+      !editedPlantData.growthStage ||
+      !editedPlantData.nutrientLevel
+    ) {
+      console.error("Please fill in all fields.");
+      return;
+    }
+
+    // Make a POST request to update the plant data
+    fetch(`http://localhost:3000/plants/${plantData.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedPlantData),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to update plant data.");
+        }
+        console.log("Plant data updated successfully.");
+        onClose(); // Close the modal after successful update
+      })
+      .catch((error) => console.error(error));
   };
 
   return (

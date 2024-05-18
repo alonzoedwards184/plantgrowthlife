@@ -22,15 +22,19 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   useEffect(() => {
-    // Reset form data when modal opens
     if (isOpen) {
-      setNewPlantData({
-        plantName: "",
-        growthStage: "",
-        nutrientLevel: "",
-      });
+      // Reset form data when modal opens
+      resetFormData();
     }
   }, [isOpen]);
+
+  const resetFormData = () => {
+    setNewPlantData({
+      plantName: "",
+      growthStage: "",
+      nutrientLevel: "",
+    });
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,10 +53,26 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     onClose(); // Close the main modal
   };
 
-  const handleSaveChanges = () => {
-    // Add logic to save new plant data
-    console.log("Saving new plant data:", newPlantData);
-    onClose(); // Close the modal after saving
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/plants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPlantData),
+      });
+
+      if (response.ok) {
+        console.log("New plant data saved:", newPlantData);
+        onClose(); // Close the modal after saving
+        resetFormData(); // Reset form data after successful save
+      } else {
+        console.error("Error saving plant data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saving plant data:", error);
+    }
   };
 
   return (
@@ -105,12 +125,14 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 {children}
               </div>
               <div className="modal-footer">
+                {/*\ Cancel Button */}
                 <button
                   type="button"
                   className="btn btn-secondary"
                   onClick={handleCancelClick}
                 >
                   Cancel
+                  {/*\ Save Button */}
                 </button>
                 <button
                   type="button"
