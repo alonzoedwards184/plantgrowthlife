@@ -1,4 +1,3 @@
-// PlantList.tsx
 import React from "react";
 import { Plant } from "../Views/PlantTable.tsx";
 
@@ -22,8 +21,18 @@ const PlantList: React.FC<PlantListProps> = ({
     <td>{plant.nutrientLevel}</td>
     <td>{plant.plantDate}</td>
     <td>
-      <button onClick={() => handleEditClick(index)}>Edit</button>
-      <button onClick={() => handleDeleteClick(index)}>Delete</button>
+      <button
+        className="btn btn-primary"
+        onClick={() => handleEditClick(index)}
+      >
+        Edit
+      </button>
+      <button
+        className="btn btn-danger"
+        onClick={() => handleDeleteClick(index)}
+      >
+        Delete
+      </button>
     </td>
   </tr>
 );

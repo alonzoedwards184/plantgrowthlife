@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
-import { Plant } from "../Views/PlantTable.tsx";
+import { Plant } from "../Views/PlantTable";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import SuccessPopup from "./SuccessPopup"; // Import the SuccessPopup component
+import PageRefresh from "./PageRefresh"; // Import the PageRefresh component
 
 interface ModalProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ const PlantEditModal: React.FC<ModalProps> = ({
     plantDate: new Date(),
   });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [isSuccessPopupVisible, setIsSuccessPopupVisible] = useState(false); // New state for success popup
 
   useEffect(() => {
     if (plantData) {
@@ -82,6 +84,7 @@ const PlantEditModal: React.FC<ModalProps> = ({
           throw new Error("Failed to update plant data.");
         }
         console.log("Plant data updated successfully.");
+        setIsSuccessPopupVisible(true); // Show success popup
         onClose();
       })
       .catch((error) => console.error(error));
@@ -89,6 +92,15 @@ const PlantEditModal: React.FC<ModalProps> = ({
 
   return (
     <>
+      {isSuccessPopupVisible && (
+        <>
+          <SuccessPopup
+            message="Changes saved successfully!"
+            onClose={() => setIsSuccessPopupVisible(false)}
+          />
+          <PageRefresh /> {/* Add the PageRefresh component */}
+        </>
+      )}
       {isOpen && (
         <div
           className="modal fade show"

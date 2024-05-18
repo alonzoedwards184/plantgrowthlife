@@ -11,79 +11,85 @@
       "id": "4",
       "plantName": "Tomato",
       "growthStage": "Flowering",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "5",
       "plantName": "Spinach",
       "growthStage": "Seedling",
-      "nutrientLevel": "Low"
+      "nutrientLevel": "Low",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "6",
       "plantName": "Cucumber",
       "growthStage": "Vegetative",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "7",
       "plantName": "Bell Pepper",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "8",
       "plantName": "Kale",
       "growthStage": "Flowering",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "9",
       "plantName": "Cherry Tomato",
       "growthStage": "Seedling",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "10",
       "plantName": "Mint",
       "growthStage": "Vegetative",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "11",
       "plantName": "Arugula",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "12",
       "plantName": "Parsley",
       "growthStage": "Flowering",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "Medium",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "13",
       "plantName": "Zucchini",
       "growthStage": "Seedling",
-      "nutrientLevel": "Low"
+      "nutrientLevel": "Low",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "14",
       "plantName": "Watercress",
       "growthStage": "Vegetative",
-      "nutrientLevel": "High"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "15",
       "plantName": "Broccoli",
       "growthStage": "Mature",
-      "nutrientLevel": "High"
-    },
-    {
-      "id": "16",
-      "plantName": "Dill",
-      "growthStage": "Flowering",
-      "nutrientLevel": "Medium"
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
       "id": "17",

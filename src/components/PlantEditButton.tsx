@@ -1,3 +1,5 @@
+import React from "react";
+
 interface PlantEditButtonProps {
   children: React.ReactNode;
   onClick: () => void;
