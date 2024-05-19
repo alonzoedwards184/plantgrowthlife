@@ -1,45 +1,56 @@
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
-import { Plant } from "./Plant.tsx";
-import DatePicker from "react-datepicker";
-import SuccessPopup from "./SuccessPopup"; // Import the SuccessPopup component
-import PageRefresh from "./PageRefresh"; // Import the PageRefresh component
+import CustomDatePicker from "./CustomDatePicker.tsx";
+
+interface Plant {
+  plantName: string;
+  growthStage: string;
+  nutrientLevel: string;
+  plantDate: Date;
+}
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children?: React.ReactNode;
-  plantData: Plant | null;
 }
 
-const PlantEditModal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  plantData,
-  children,
-}) => {
-  const [editedPlantData, setEditedPlantData] = useState<Plant | null>(null);
+const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+  const [newPlantData, setNewPlantData] = useState<Plant>({
+    plantName: "",
+    growthStage: "",
+    nutrientLevel: "",
+    plantDate: new Date(),
+  });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
-  const [isSuccessPopupVisible, setIsSuccessPopupVisible] = useState(false);
-  const [shouldRefreshPage, setShouldRefreshPage] = useState(false);
 
   useEffect(() => {
-    if (plantData) {
-      setEditedPlantData(plantData);
+    if (isOpen) {
+      resetFormData();
     }
-  }, [plantData]);
+  }, [isOpen]);
 
-  const handleFieldChange = (
-    fieldName: string,
-    value: string | Date | null,
-  ) => {
-    if (editedPlantData) {
-      setEditedPlantData((prevState: Plant | null) => ({
-        ...(prevState as Plant),
-        [fieldName]:
-          value instanceof Date ? value : value ? new Date(value) : null,
-      }));
-    }
+  const resetFormData = () => {
+    setNewPlantData({
+      plantName: "",
+      growthStage: "",
+      nutrientLevel: "",
+      plantDate: new Date(),
+    });
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewPlantData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setNewPlantData((prevState) => ({
+      ...prevState,
+      plantDate: date || new Date(),
+    }));
   };
 
   const handleCancelClick = () => {
@@ -51,63 +62,30 @@ const PlantEditModal: React.FC<ModalProps> = ({
     onClose();
   };
 
-  const handleSaveChanges = () => {
-    if (!plantData || !editedPlantData) {
-      // Check if plantData or editedPlantData is null
-      console.error("No plant data available.");
-      return;
-    }
+  const handleSaveChanges = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/plants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPlantData),
+      });
 
-    const { plantName, growthStage, nutrientLevel } = editedPlantData;
-    if (!plantName || !growthStage || !nutrientLevel) {
-      console.error("Please fill in all fields.");
-      return;
+      if (response.ok) {
+        console.log("New plant data saved:", newPlantData);
+        onClose();
+        resetFormData();
+      } else {
+        console.error("Error saving plant data:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error saving plant data:", error);
     }
-
-    fetch(`http://localhost:3000/plants/${plantData.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(editedPlantData),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update plant data.");
-        }
-        console.log("Plant data updated successfully.");
-        setIsSuccessPopupVisible(true);
-        setTimeout(() => {
-          setShouldRefreshPage(true);
-        }, 2000); // Delay for 2 seconds before refreshing the page
-      })
-      .catch((error) => console.error(error));
   };
-
-  useEffect(() => {
-    if (!isOpen) {
-      setIsSuccessPopupVisible(false);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (shouldRefreshPage) {
-      window.location.reload();
-    }
-  }, [shouldRefreshPage]);
 
   return (
     <>
-      {isSuccessPopupVisible && (
-        <>
-          <SuccessPopup
-            message="Changes saved successfully!"
-            onClose={() => setIsSuccessPopupVisible(false)}
-          />
-          <PageRefresh /> {/* Include PageRefresh here */}
-        </>
-      )}
-
       {isOpen && (
         <div
           className="modal fade show"
@@ -117,71 +95,49 @@ const PlantEditModal: React.FC<ModalProps> = ({
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Edit Plant</h5>
+                <h5 className="modal-title">Add Plant</h5>
               </div>
               <div className="modal-body">
-                {plantData ? (
-                  <>
-                    <div className="form-group">
-                      <label htmlFor="plantName">Plant Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="plantName"
-                        name="plantName"
-                        value={editedPlantData?.plantName || ""}
-                        onChange={(e) =>
-                          handleFieldChange(e.target.name, e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="growthStage">Growth Stage</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="growthStage"
-                        name="growthStage"
-                        value={editedPlantData?.growthStage || ""}
-                        onChange={(e) =>
-                          handleFieldChange(e.target.name, e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="nutrientLevel">Nutrient Level</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="nutrientLevel"
-                        name="nutrientLevel"
-                        value={editedPlantData?.nutrientLevel || ""}
-                        onChange={(e) =>
-                          handleFieldChange(e.target.name, e.target.value)
-                        }
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="plantDate">Plant Date</label>
-                      <DatePicker
-                        selected={
-                          editedPlantData?.plantDate
-                            ? new Date(editedPlantData.plantDate)
-                            : null
-                        }
-                        onChange={(date) =>
-                          handleFieldChange("plantDate", date)
-                        }
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText="Select Date"
-                        className="form-control"
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <p>No plant data available.</p>
-                )}
-                {children}
+                <div className="form-group">
+                  <label htmlFor="plantName">Plant Name</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="plantName"
+                    name="plantName"
+                    value={newPlantData.plantName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="growthStage">Growth Stage</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="growthStage"
+                    name="growthStage"
+                    value={newPlantData.growthStage}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="nutrientLevel">Nutrient Level</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="nutrientLevel"
+                    name="nutrientLevel"
+                    value={newPlantData.nutrientLevel}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="plantDate">Plant Date</label>
+                  <CustomDatePicker
+                    selectedDate={newPlantData.plantDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
               </div>
               <div className="modal-footer">
                 <button
@@ -193,10 +149,10 @@ const PlantEditModal: React.FC<ModalProps> = ({
                 </button>
                 <button
                   type="button"
-                  className="btn btn-success"
+                  className="btn btn-primary"
                   onClick={handleSaveChanges}
                 >
-                  Save Changes
+                  Save
                 </button>
               </div>
             </div>
@@ -212,4 +168,4 @@ const PlantEditModal: React.FC<ModalProps> = ({
   );
 };
 
-export default PlantEditModal;
+export default PlantAddModal;

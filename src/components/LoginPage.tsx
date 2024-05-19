@@ -1,77 +1,76 @@
 import React, { useState } from "react";
-import { Button, Form, Container } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import SignupPageButton from "./SignupPageButton.tsx";
+import { useAuth } from "../context/AuthContext.tsx";
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [validated, setValidated] = useState<boolean>(false);
-  const navigate = useNavigate(); // useNavigate instead of useHistory
+  const { login } = useAuth();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null); // Specify the type explicitly
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    }
-    setValidated(true);
-
-    // For demo purpose, check hardcoded credentials
-    if (email === "User" && password === "Pass") {
-      // Redirect to dashboard after successful login
-      navigate("/dashboard"); // Use navigate function here
-    } else {
-      // Clear password field on failed login attempt
-      setPassword("");
-      // Show an alert for failed login attempt
-      alert("Invalid username or password. Please try again.");
+    console.log("Submitting login form");
+    try {
+      await login(username, password);
+      // If login is successful, clear any previous error message
+      setError(null);
+    } catch (error: any) {
+      // Specify 'any' type for error
+      // If login fails, set error message
+      if (error.response && error.response.status === 401) {
+        const errorMessage =
+          "Incorrect username or password. Please try again.";
+        setError(errorMessage);
+        console.error(errorMessage); // Log error message
+      } else {
+        const errorMessage =
+          "An unexpected error occurred. Please try again later.";
+        setError(errorMessage);
+        console.error(errorMessage); // Log error message
+      }
     }
   };
 
   return (
-    <Container className="mt-5">
-      <h2>Login</h2>
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
+    <div className="container">
+      <h1>Login Page</h1>
+      <form onSubmit={handleLogin}>
+        {error && (
+          <div className="alert alert-danger" role="alert">
+            {error}
+          </div>
+        )}
+        <div className="mb-3">
+          <label htmlFor="username" className="form-label">
+            Username:
+          </label>
+          <input
             type="text"
-            placeholder="Enter username"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            className="form-control"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
-            autoFocus // Add autofocus here
           />
-          <Form.Control.Feedback type="invalid">
-            Please enter a valid username.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
+          <input
             type="password"
-            placeholder="Password"
+            className="form-control"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Form.Control.Feedback type="invalid">
-            Please enter your password.
-          </Form.Control.Feedback>
-        </Form.Group>
-
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-
-        {/* Signup button */}
-        <SignupPageButton onClick={() => navigate("/signup")}>
-          Sign Up
-        </SignupPageButton>
-      </Form>
-    </Container>
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 

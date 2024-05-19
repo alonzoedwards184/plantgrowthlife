@@ -1,3 +1,5 @@
+// PlantAddModal Component
+// Component ID: PLANT_ADD_MODAL
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
 import CustomDatePicker from "./CustomDatePicker.tsx";
@@ -42,6 +44,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(`Input Change - Name: ${name}, Value: ${value}`); // Debug log
     setNewPlantData((prevState) => ({
       ...prevState,
       [name]: value,
@@ -49,6 +52,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   };
 
   const handleDateChange = (date: Date | null) => {
+    console.log(`Date Change - Date: ${date}`); // Debug log
     setNewPlantData((prevState) => ({
       ...prevState,
       plantDate: date || new Date(), // Set plantDate to selected date or current date if null

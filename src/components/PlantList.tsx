@@ -3,9 +3,9 @@ import { Plant } from "./Plant.tsx";
 
 interface PlantListProps {
   plant: Plant;
-  index: number;
-  handleEditClick: (index: number) => void;
-  handleDeleteClick: (index: number) => void;
+  index: number; // Add index property if needed
+  handleEditClick: (id: number, editedPlant: Plant) => void;
+  handleDeleteClick: (id: number) => void;
 }
 
 const PlantList: React.FC<PlantListProps> = ({
@@ -23,7 +23,7 @@ const PlantList: React.FC<PlantListProps> = ({
     <td>
       <button
         className="btn btn-primary"
-        onClick={() => handleEditClick(index)}
+        onClick={() => handleEditClick(index, plant)}
       >
         Edit
       </button>

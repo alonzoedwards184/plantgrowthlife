@@ -1,5 +1,6 @@
 import React from "react";
 import { Plant } from "./Plant.tsx";
+
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
@@ -12,6 +13,8 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   onPageChange,
+  data,
+  itemsPerPage,
 }) => {
   const pageNumbers: number[] = [];
 
@@ -19,8 +22,22 @@ const Pagination: React.FC<PaginationProps> = ({
     pageNumbers.push(i);
   }
 
+  const totalItems = data.length;
+
+  const renderPaginationInfo = () => {
+    const startIndex = (currentPage - 1) * itemsPerPage + 1;
+    const endIndex = Math.min(currentPage * itemsPerPage, totalItems);
+
+    return (
+      <span className="pagination-info">
+        Showing {startIndex}-{endIndex} of {totalItems} items
+      </span>
+    );
+  };
+
   return (
     <nav aria-label="...">
+      {totalItems > itemsPerPage && renderPaginationInfo()}
       <ul className="pagination">
         <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
           <a
