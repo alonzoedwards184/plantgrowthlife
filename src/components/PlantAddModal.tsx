@@ -1,5 +1,3 @@
-// PlantAddModal Component
-// Component ID: PLANT_ADD_MODAL
 import React, { useState, useEffect } from "react";
 import CancelConfirmationModal from "./CancelConfirmationModal";
 import CustomDatePicker from "./CustomDatePicker.tsx";
@@ -93,19 +91,17 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   return (
     <>
       {isOpen && (
-        <div
-          className="modal fade show"
-          tabIndex={-1}
-          style={{ display: "block" }}
-        >
-          <div className="modal-dialog">
+        <div className="modal show" tabIndex={-1} style={{ display: "block" }}>
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Add Plant</h5>
               </div>
               <div className="modal-body">
                 <div className="form-group">
-                  <label htmlFor="plantName">Plant Name</label>
+                  <label htmlFor="plantName" className="form-label">
+                    Plant Name
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -116,7 +112,9 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="growthStage">Growth Stage</label>
+                  <label htmlFor="growthStage" className="form-label">
+                    Growth Stage
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -127,7 +125,9 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="nutrientLevel">Nutrient Level</label>
+                  <label htmlFor="nutrientLevel" className="form-label">
+                    Nutrient Level
+                  </label>
                   <input
                     type="text"
                     className="form-control"
@@ -138,7 +138,9 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="plantDate">Plant Date</label>
+                  <label htmlFor="plantDate" className="form-label">
+                    Plant Date
+                  </label>
                   <CustomDatePicker
                     selectedDate={newPlantData.plantDate}
                     onChange={handleDateChange}
@@ -147,7 +149,6 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 {children}
               </div>
               <div className="modal-footer">
-                {/* Cancel Button */}
                 <button
                   type="button"
                   className="btn btn-secondary"
@@ -155,7 +156,6 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                 >
                   Cancel
                 </button>
-                {/* Save Button */}
                 <button
                   type="button"
                   className="btn btn-primary"

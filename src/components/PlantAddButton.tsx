@@ -1,15 +1,20 @@
 import React from "react";
 
-interface PlantEditButtonProps {
+interface PlantAddButtonProps {
   onClick: () => void; // Add onClick prop
 }
 
-const PlantEditButton: React.FC<PlantEditButtonProps> = ({ onClick }) => {
+const PlantAddButton: React.FC<PlantAddButtonProps> = ({ onClick }) => {
+  const handleClick = () => {
+    console.log("Add Plant button clicked"); // Log when the button is clicked
+    onClick(); // Call the provided onClick function
+  };
+
   return (
-    <button type="button" className="btn btn-primary" onClick={onClick}>
+    <button type="button" className="btn btn-primary" onClick={handleClick}>
       Add Plant
     </button>
   );
 };
 
-export default PlantEditButton;
+export default PlantAddButton;

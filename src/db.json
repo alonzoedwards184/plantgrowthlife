@@ -209,6 +209,20 @@
       "growthStage": "Seedling",
       "nutrientLevel": "High",
       "plantDate": "2024-05-19T03:52:09.371Z"
+    },
+    {
+      "id": "1758",
+      "plantName": "Apple",
+      "growthStage": "Seedling",
+      "nutrientLevel": "High",
+      "plantDate": "2024-05-19T22:44:28.294Z"
+    },
+    {
+      "id": "b4bd",
+      "plantName": "Alonzo",
+      "growthStage": "Alonzo",
+      "nutrientLevel": "Alonzo",
+      "plantDate": "2024-05-19T22:45:04.536Z"
     }
   ]
 }

@@ -10,6 +10,7 @@ import { AuthProvider, useAuth } from "./context/AuthContext.tsx";
 import HomePage from "./Views/HomePage.tsx";
 import LoginPage from "../src/components/LoginPage.tsx";
 import Navbar from "../src/components/Navbar.tsx";
+import Footer from "./components/Footer.tsx";
 
 const App: React.FC = () => {
   return (
@@ -65,6 +66,7 @@ const AuthenticatedApp: React.FC = () => (
   <>
     <Navbar /> {/* Display the Navbar when the user is authenticated */}
     <HomePage />
+    <Footer />
   </>
 );
 
