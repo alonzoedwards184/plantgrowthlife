@@ -1,35 +1,72 @@
 import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+  useNavigate,
+} from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext.tsx";
 import HomePage from "./Views/HomePage.tsx";
 import LoginPage from "../src/components/LoginPage.tsx";
-import Navbar from "../src/components/Navbar.tsx"; // Importing the Navbar component
+import Navbar from "../src/components/Navbar.tsx";
 
 const App: React.FC = () => {
   return (
     <AuthProvider>
-      <AppContent />
+      <Router>
+        <AppContent />
+      </Router>
     </AuthProvider>
   );
 };
 
 const AppContent: React.FC = () => {
   const { isAuthenticated } = useSafeAuth();
+  const navigate = useNavigate(); // Initialize useNavigate for navigation control
+
+  useEffect(() => {
+    // Function to handle browser history to prevent going back to login page
+    const handlePopState = () => {
+      if (!isAuthenticated && window.location.pathname !== "/login") {
+        navigate("/login");
+      }
+    };
+
+    // Add event listener for popstate
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [isAuthenticated, navigate]);
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("User is authenticated. Redirecting to homepage...");
+      // Replace the current state with home page state
+      navigate("/", { replace: true });
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
-  return isAuthenticated ? (
-    <>
-      <Navbar /> {/* Display the Navbar when the user is authenticated */}
-      <HomePage />
-    </>
-  ) : (
-    <LoginPage />
+  return (
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+      <Route
+        path="/"
+        element={
+          isAuthenticated ? <AuthenticatedApp /> : <Navigate to="/login" />
+        }
+      />
+    </Routes>
   );
 };
+
+const AuthenticatedApp: React.FC = () => (
+  <>
+    <Navbar /> {/* Display the Navbar when the user is authenticated */}
+    <HomePage />
+  </>
+);
 
 const useSafeAuth = () => {
   const context = useAuth();

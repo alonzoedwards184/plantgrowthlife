@@ -2,13 +2,20 @@
  * Developer: [Alonz0 Edwards]
  * Date: [May 19, 2024]
  * Description:
- - This file provides an authentication context using React Context API.
- - It exports an AuthProvider component to wrap around the application,
- - managing authentication state and providing login and logout functions.
- - The useAuth hook is also exported to access authentication state and functions
- - within components that are descendants of the AuthProvider.*/
+ * - This file provides an authentication context using React Context API.
+ * - It exports an AuthProvider component to wrap around the application,
+ * - managing authentication state and providing login and logout functions.
+ * - The useAuth hook is also exported to access authentication state and functions
+ * - within components that are descendants of the AuthProvider.
+ */
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -23,7 +30,11 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const storedAuthState = localStorage.getItem("isAuthenticated");
+    return storedAuthState ? JSON.parse(storedAuthState) : false;
+  });
+
   const defaultUsername = "user"; // Temporary default username
   const defaultPassword = "pass"; // Temporary default password
 
@@ -38,6 +49,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     setIsAuthenticated(false);
   };
+
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", JSON.stringify(isAuthenticated));
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
