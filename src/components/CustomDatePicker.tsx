@@ -14,7 +14,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   return (
     <div>
       <DatePicker
-        selected={selectedDate !== null ? new Date(selectedDate) : null} // Adjusted logic
+        selected={selectedDate instanceof Date ? selectedDate : null}
         onChange={(date) => onChange(date)}
         dateFormat="dd/MM/yyyy"
         placeholderText="Select Date"

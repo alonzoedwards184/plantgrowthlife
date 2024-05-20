@@ -13,13 +13,11 @@ interface PlantListProps {
 const PlantList: React.FC<PlantListProps> = ({
   plant,
   index,
-
   handleDeleteClick,
 }) => {
   // State for controlling the modal visibility
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
-  // Function to open the modal
   const openModal = () => {
     setIsEditModalOpen(true);
   };
@@ -29,13 +27,18 @@ const PlantList: React.FC<PlantListProps> = ({
     setIsEditModalOpen(false);
   };
 
+  // Log the type and value of props for debugging
+  console.log("plant prop:", plant);
+  console.log("index prop:", index);
+  console.log("handleDeleteClick prop:", handleDeleteClick);
+
   return (
     <tr>
       <th scope="row">{index + 1}</th>
       <td>{plant.plantName}</td>
       <td>{plant.growthStage}</td>
       <td>{plant.nutrientLevel}</td>
-      <td>{plant.plantDate.toLocaleDateString()}</td>
+      <td>{plant.plantDate.toString()}</td>
       {/* Convert Date to string */}
       <td>
         {/* Pass the necessary props to PlantEditButton */}
