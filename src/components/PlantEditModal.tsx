@@ -3,6 +3,7 @@ import CancelConfirmationModal from "./CancelConfirmationModal";
 import CustomDatePicker from "./CustomDatePicker.tsx";
 
 interface Plant {
+  id: number; // Add an ID field to uniquely identify each plant
   plantName: string;
   growthStage: string;
   nutrientLevel: string;
@@ -12,42 +13,35 @@ interface Plant {
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  plantData: Plant; // Pass the existing plant data to the modal
 }
 
-const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-  const [newPlantData, setNewPlantData] = useState<Plant>({
-    plantName: "",
-    growthStage: "",
-    nutrientLevel: "",
-    plantDate: new Date(),
+const PlantEditModal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  plantData,
+}) => {
+  const [editedPlantData, setEditedPlantData] = useState<Plant>({
+    ...plantData,
   });
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
-      resetFormData();
+      setEditedPlantData({ ...plantData }); // Initialize edited plant data with the provided plant data
     }
-  }, [isOpen]);
-
-  const resetFormData = () => {
-    setNewPlantData({
-      plantName: "",
-      growthStage: "",
-      nutrientLevel: "",
-      plantDate: new Date(),
-    });
-  };
+  }, [isOpen, plantData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewPlantData((prevState) => ({
+    setEditedPlantData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
   const handleDateChange = (date: Date | null) => {
-    setNewPlantData((prevState) => ({
+    setEditedPlantData((prevState) => ({
       ...prevState,
       plantDate: date || new Date(),
     }));
@@ -64,48 +58,48 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
 
   const handleSaveChanges = async () => {
     try {
-      const response = await fetch("http://localhost:3000/plants", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        `http://localhost:3000/plants/${editedPlantData.id}`,
+        {
+          method: "PUT", // Use PUT method to update existing data
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedPlantData),
         },
-        body: JSON.stringify(newPlantData),
-      });
+      );
 
       if (response.ok) {
-        console.log("New plant data saved:", newPlantData);
+        console.log("Plant data updated:", editedPlantData);
         onClose();
-        resetFormData();
       } else {
-        console.error("Error saving plant data:", response.statusText);
+        console.error("Error updating plant data:", response.statusText);
       }
     } catch (error) {
-      console.error("Error saving plant data:", error);
+      console.error("Error updating plant data:", error);
     }
   };
 
   return (
     <>
       {isOpen && (
-        <div
-          className="modal fade show"
-          tabIndex={-1}
-          style={{ display: "block" }}
-        >
+        <div className="modal show" tabIndex={-1} style={{ display: "block" }}>
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Add Plant</h5>
+                <h5 className="modal-title">Edit Plant</h5>
               </div>
               <div className="modal-body">
                 <div className="form-group">
-                  <label htmlFor="plantName">Plant Name</label>
+                  <label htmlFor="plantName" className={"form-label"}>
+                    Plant Name
+                  </label>
                   <input
                     type="text"
                     className="form-control"
                     id="plantName"
                     name="plantName"
-                    value={newPlantData.plantName}
+                    value={editedPlantData.plantName}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -116,7 +110,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     className="form-control"
                     id="growthStage"
                     name="growthStage"
-                    value={newPlantData.growthStage}
+                    value={editedPlantData.growthStage}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -127,14 +121,14 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     className="form-control"
                     id="nutrientLevel"
                     name="nutrientLevel"
-                    value={newPlantData.nutrientLevel}
+                    value={editedPlantData.nutrientLevel}
                     onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="plantDate">Plant Date</label>
                   <CustomDatePicker
-                    selectedDate={newPlantData.plantDate}
+                    selectedDate={editedPlantData.plantDate}
                     onChange={handleDateChange}
                   />
                 </div>
@@ -168,4 +162,4 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
   );
 };
 
-export default PlantAddModal;
+export default PlantEditModal;

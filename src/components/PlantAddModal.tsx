@@ -15,8 +15,12 @@ interface ModalProps {
   children?: React.ReactNode;
 }
 
-const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  const [newPlantData, setNewPlantData] = useState<Plant>({
+const PlantEditModal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  children,
+}) => {
+  const [editedPlantData, setEditedPlantData] = useState<Plant>({
     plantName: "",
     growthStage: "",
     nutrientLevel: "",
@@ -32,7 +36,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   }, [isOpen]);
 
   const resetFormData = () => {
-    setNewPlantData({
+    setEditedPlantData({
       plantName: "",
       growthStage: "",
       nutrientLevel: "",
@@ -43,7 +47,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     console.log(`Input Change - Name: ${name}, Value: ${value}`); // Debug log
-    setNewPlantData((prevState) => ({
+    setEditedPlantData((prevState) => ({
       ...prevState,
       [name]: value,
     }));
@@ -51,7 +55,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   const handleDateChange = (date: Date | null) => {
     console.log(`Date Change - Date: ${date}`); // Debug log
-    setNewPlantData((prevState) => ({
+    setEditedPlantData((prevState) => ({
       ...prevState,
       plantDate: date || new Date(), // Set plantDate to selected date or current date if null
     }));
@@ -73,18 +77,18 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newPlantData),
+        body: JSON.stringify(editedPlantData),
       });
 
       if (response.ok) {
-        console.log("New plant data saved:", newPlantData);
+        console.log("Plant data edited:", editedPlantData);
         onClose(); // Close the modal after saving
         resetFormData(); // Reset form data after successful save
       } else {
-        console.error("Error saving plant data:", response.statusText);
+        console.error("Error editing plant data:", response.statusText);
       }
     } catch (error) {
-      console.error("Error saving plant data:", error);
+      console.error("Error editing plant data:", error);
     }
   };
 
@@ -92,14 +96,14 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     <>
       {isOpen && (
         <div className="modal show" tabIndex={-1} style={{ display: "block" }}>
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Add Plant</h5>
+                <h5 className="modal-title">Edit Plant</h5>
               </div>
               <div className="modal-body">
                 <div className="form-group">
-                  <label htmlFor="plantName" className="form-label">
+                  <label htmlFor="plantName" className={"form-label"}>
                     Plant Name
                   </label>
                   <input
@@ -107,7 +111,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     className="form-control"
                     id="plantName"
                     name="plantName"
-                    value={newPlantData.plantName}
+                    value={editedPlantData.plantName}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -120,7 +124,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     className="form-control"
                     id="growthStage"
                     name="growthStage"
-                    value={newPlantData.growthStage}
+                    value={editedPlantData.growthStage}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -133,7 +137,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     className="form-control"
                     id="nutrientLevel"
                     name="nutrientLevel"
-                    value={newPlantData.nutrientLevel}
+                    value={editedPlantData.nutrientLevel}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -142,7 +146,7 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
                     Plant Date
                   </label>
                   <CustomDatePicker
-                    selectedDate={newPlantData.plantDate}
+                    selectedDate={editedPlantData.plantDate}
                     onChange={handleDateChange}
                   />
                 </div>
@@ -177,4 +181,4 @@ const PlantAddModal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   );
 };
 
-export default PlantAddModal;
+export default PlantEditModal;

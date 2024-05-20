@@ -11,6 +11,7 @@ import HomePage from "./Views/HomePage.tsx";
 import LoginPage from "../src/components/LoginPage.tsx";
 import Navbar from "../src/components/Navbar.tsx";
 import Footer from "./components/Footer.tsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App: React.FC = () => {
   return (

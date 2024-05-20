@@ -4,5 +4,5 @@ export interface Plant {
   plantName: string;
   growthStage: string;
   nutrientLevel: string;
-  plantDate: string; // Changed type to Date
+  plantDate: Date; // Changed type to Date
 }

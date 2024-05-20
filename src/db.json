@@ -1,228 +1,60 @@
 {
   "plants": [
     {
-      "id": "2",
+      "id": 2,
       "plantName": "Basil",
       "growthStage": "Seedling",
       "nutrientLevel": "Medium",
       "plantDate": "2024-05-01T05:00:00.000Z"
     },
     {
-      "id": "4",
+      "id": 4,
       "plantName": "Tomato",
       "growthStage": "Flowering",
       "nutrientLevel": "High",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "5",
+      "id": 5,
       "plantName": "Spinach",
       "growthStage": "Seedling",
       "nutrientLevel": "Low",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "6",
+      "id": 6,
       "plantName": "Cucumber",
       "growthStage": "Vegetative",
       "nutrientLevel": "Medium",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "7",
+      "id": 7,
       "plantName": "Bell Pepper",
       "growthStage": "Mature",
       "nutrientLevel": "High",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "8",
+      "id": 8,
       "plantName": "Kale",
       "growthStage": "Flowering",
       "nutrientLevel": "High",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "9",
+      "id": 9,
       "plantName": "Cherry Tomato",
       "growthStage": "Seedling",
       "nutrientLevel": "Medium",
       "plantDate": "2024-05-18T05:00:00.000Z"
     },
     {
-      "id": "10",
+      "id": 10,
       "plantName": "Mint",
       "growthStage": "Vegetative",
       "nutrientLevel": "High",
       "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "11",
-      "plantName": "Arugula",
-      "growthStage": "Mature",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "12",
-      "plantName": "Parsley",
-      "growthStage": "Flowering",
-      "nutrientLevel": "Medium",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "13",
-      "plantName": "Zucchini",
-      "growthStage": "Seedling",
-      "nutrientLevel": "Low",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "14",
-      "plantName": "Watercress",
-      "growthStage": "Vegetative",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T05:00:00.000Z"
-    },
-    {
-      "id": "15",
-      "plantName": "Broccoli",
-      "growthStage": "Mature",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "17",
-      "plantName": "Cilantro",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "3d65",
-      "plantName": "Plant 2",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "99fd",
-      "plantName": "DingleBerry",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "18",
-      "plantName": "Rosemary",
-      "growthStage": "Vegetative",
-      "nutrientLevel": "Medium",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "19",
-      "plantName": "Thyme",
-      "growthStage": "Mature",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "20",
-      "plantName": "Oregano",
-      "growthStage": "Flowering",
-      "nutrientLevel": "Medium",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "24",
-      "plantName": "Lavender",
-      "growthStage": "Flowering",
-      "nutrientLevel": "Medium",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "25",
-      "plantName": "Mushrooms",
-      "growthStage": "Mature",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "26",
-      "plantName": "Cabbage",
-      "growthStage": "Vegetative",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-18T05:00:00.000Z"
-    },
-    {
-      "id": "27",
-      "plantName": "Celery",
-      "growthStage": "Seedling",
-      "nutrientLevel": "Medium",
-      "plantDate": "2024-05-17T05:00:00.000Z"
-    },
-    {
-      "id": "3aa3",
-      "plantName": "Banana",
-      "growthStage": "Seedling",
-      "nutrientLevel": "Low",
-      "plantDate": "2024-05-22T14:55:25.000Z"
-    },
-    {
-      "id": "76ac",
-      "plantName": "Apple",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-24T15:13:07.000Z"
-    },
-    {
-      "id": "643d",
-      "plantName": "",
-      "growthStage": "",
-      "nutrientLevel": "",
-      "plantDate": "2024-05-19T00:22:43.580Z"
-    },
-    {
-      "id": "335e",
-      "plantName": "Apple",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T00:34:52.896Z"
-    },
-    {
-      "id": "4c16",
-      "plantName": "Apple",
-      "growthStage": "asdf",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T03:07:59.941Z"
-    },
-    {
-      "id": "58aa",
-      "plantName": "Plant 2",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T03:51:45.000Z"
-    },
-    {
-      "id": "24a5",
-      "plantName": "Plant 2",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T03:52:09.371Z"
-    },
-    {
-      "id": "1758",
-      "plantName": "Apple",
-      "growthStage": "Seedling",
-      "nutrientLevel": "High",
-      "plantDate": "2024-05-19T22:44:28.294Z"
-    },
-    {
-      "id": "b4bd",
-      "plantName": "Alonzo",
-      "growthStage": "Alonzo",
-      "nutrientLevel": "Alonzo",
-      "plantDate": "2024-05-19T22:45:04.536Z"
     }
   ]
 }

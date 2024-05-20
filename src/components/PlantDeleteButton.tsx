@@ -8,7 +8,7 @@ const PlantEditButton: React.FC<PlantEditButtonProps> = ({
   onClick,
 }) => {
   return (
-    <button type="button" className="btn btn-primary" onClick={onClick}>
+    <button type="button" className="btn btn-danger" onClick={onClick}>
       {children}
     </button>
   );
